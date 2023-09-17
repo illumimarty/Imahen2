@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yRR-yY-asI">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
@@ -15,28 +15,16 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5EZ-xb-JRY">
-                                <rect key="frame" x="0.0" y="91" width="393" height="393"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="5EZ-xb-JRY" secondAttribute="height" multiplier="1:1" id="EtX-dj-ece"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="5EZ-xb-JRY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="ko5-HQ-HKA"/>
-                            <constraint firstItem="5EZ-xb-JRY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mvS-5s-rV1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5EZ-xb-JRY" secondAttribute="trailing" id="z1S-5C-Xi9"/>
-                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="xnI-1z-CX6" appends="YES" id="6C3-aU-zSu"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="I9d-dz-5Ui"/>
                     <connections>
-                        <outlet property="draftImageView" destination="5EZ-xb-JRY" id="IJp-Jz-OgL"/>
+                        <segue destination="0Kn-yg-KHw" kind="show" identifier="pickerToDraft" id="cDI-eB-UJK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -46,12 +34,66 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="132" y="-34"/>
+            <point key="canvasLocation" x="1057.2519083969464" y="-34.507042253521128"/>
+        </scene>
+        <!--DraftViewController-->
+        <scene sceneID="LCv-HM-Hd3">
+            <objects>
+                <viewController storyboardIdentifier="DraftViewController" title="DraftViewController" modalPresentationStyle="fullScreen" id="0Kn-yg-KHw" customClass="DraftViewController" customModule="Imahen2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XCq-tp-nig">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EGn-Fe-cAz">
+                                <rect key="frame" x="0.0" y="135" width="393" height="393"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EGn-Fe-cAz" secondAttribute="height" multiplier="1:1" id="IVL-Fe-R6b"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DVd-zi-OM3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EGn-Fe-cAz" firstAttribute="top" secondItem="DVd-zi-OM3" secondAttribute="top" constant="32" id="7Nt-UX-Cgn"/>
+                            <constraint firstItem="EGn-Fe-cAz" firstAttribute="trailing" secondItem="DVd-zi-OM3" secondAttribute="trailing" id="gml-Sm-4cU"/>
+                            <constraint firstItem="EGn-Fe-cAz" firstAttribute="leading" secondItem="DVd-zi-OM3" secondAttribute="leading" id="pWG-21-Qbu"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="pV3-Uo-TDv"/>
+                    <connections>
+                        <outlet property="draftImageView" destination="EGn-Fe-cAz" id="CWm-ya-GAj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4QQ-CF-S7m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1886.2595419847328" y="-35.211267605633807"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cgY-6p-Hdk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yRR-yY-asI" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Vp-Gn-NAD">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="w8B-c2-UB0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TSf-fW-htz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

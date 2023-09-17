@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
-    @IBOutlet weak var draftImageView: UIImageView!
+    var imageToSend: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,19 +40,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         alertController.addAction(cameraAction)
         alertController.addAction(cancelAction)
         
-        self.present(alertController, animated: true) 
+        self.present(alertController, animated: true) {
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let originalImage = info[.originalImage]
-        let editedImage = info[.editedImage]
+        let editedImage = info[.editedImage] as! UIImage
         
         
         let bounds: CGRect = self.view.window!.bounds
         let width: CGFloat = bounds.size.width
         let imageSize: CGSize = CGSizeMake(width, width)
-        draftImageView.image = resizeImage(editedImage as! UIImage, withSize: imageSize)
-        self.dismiss(animated: true)
+        imageToSend = resizeImage(editedImage, withSize: imageSize)
+//        draftImageView.image = resizeImage(editedImage as! UIImage, withSize: imageSize)
+        self.dismiss(animated: true) {
+            self.performSegue(withIdentifier: "pickerToDraft", sender: nil)
+        }
     }
     
     func resizeImage(_ image: UIImage, withSize size: CGSize) -> UIImage {
@@ -71,7 +75,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         return newImage
     }
     
-    
+    // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
+        if (segue.identifier == "pickerToDraft") {
+            var draftVC = segue.destination as! DraftViewController
+            
+            if let img = self.imageToSend {
+                draftVC.draftImage = img
+            }
+        }
+    }
 }
 

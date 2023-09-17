@@ -13,6 +13,7 @@
 		991354792AB78AD800EE7FB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991354772AB78AD800EE7FB3 /* Main.storyboard */; };
 		9913547B2AB78ADA00EE7FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9913547A2AB78ADA00EE7FB3 /* Assets.xcassets */; };
 		9913547E2AB78ADA00EE7FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9913547C2AB78ADA00EE7FB3 /* LaunchScreen.storyboard */; };
+		991354882AB7A44900EE7FB3 /* DraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991354872AB7A44900EE7FB3 /* DraftViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		9913547A2AB78ADA00EE7FB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9913547D2AB78ADA00EE7FB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9913547F2AB78ADA00EE7FB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		991354872AB7A44900EE7FB3 /* DraftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				991354712AB78AD800EE7FB3 /* AppDelegate.swift */,
 				991354732AB78AD800EE7FB3 /* SceneDelegate.swift */,
 				991354752AB78AD800EE7FB3 /* ViewController.swift */,
+				991354872AB7A44900EE7FB3 /* DraftViewController.swift */,
 				991354772AB78AD800EE7FB3 /* Main.storyboard */,
 				9913547A2AB78ADA00EE7FB3 /* Assets.xcassets */,
 				9913547C2AB78ADA00EE7FB3 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				991354882AB7A44900EE7FB3 /* DraftViewController.swift in Sources */,
 				991354762AB78AD800EE7FB3 /* ViewController.swift in Sources */,
 				991354722AB78AD800EE7FB3 /* AppDelegate.swift in Sources */,
 				991354742AB78AD800EE7FB3 /* SceneDelegate.swift in Sources */,
