@@ -11,8 +11,11 @@ class OptionCell: UICollectionViewCell {
     
     @IBOutlet weak var optionImage: UIImageView!
     @IBOutlet weak var optionName: UILabel!
-
+    var img: UIImage!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        optionImage.image = img
     }
 }

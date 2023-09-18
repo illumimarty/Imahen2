@@ -38,8 +38,7 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OptionCell", for: indexPath) as! OptionCell
         let idx = indexPath.item
         cell.optionName.text = optionNames[idx]
-        cell.optionImage.image = UIImage(named: optionImages[idx])
-        
+        cell.optionImage.image = UIImage(systemName: optionImages[idx])
         
         return cell
     }
