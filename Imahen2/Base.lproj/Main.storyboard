@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,8 +16,17 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Press anywhere to begin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kVC-gU-829">
+                                <rect key="frame" x="103" y="355" width="187" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="tertiaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="xnI-1z-CX6" appends="YES" id="6C3-aU-zSu"/>
@@ -51,18 +61,43 @@
                                     <constraint firstAttribute="width" secondItem="EGn-Fe-cAz" secondAttribute="height" multiplier="1:1" id="IVL-Fe-R6b"/>
                                 </constraints>
                             </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lin-cP-mFC">
+                                <rect key="frame" x="0.0" y="590" width="393" height="162"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uAU-c5-2cX">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="OptionCell" id="8DF-Qa-S7L">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ITP-RR-C37">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DVd-zi-OM3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="lin-cP-mFC" firstAttribute="trailing" secondItem="EGn-Fe-cAz" secondAttribute="trailing" id="1LO-F6-td1"/>
                             <constraint firstItem="EGn-Fe-cAz" firstAttribute="top" secondItem="DVd-zi-OM3" secondAttribute="top" constant="32" id="7Nt-UX-Cgn"/>
+                            <constraint firstItem="lin-cP-mFC" firstAttribute="leading" secondItem="EGn-Fe-cAz" secondAttribute="leading" id="967-lr-UXs"/>
+                            <constraint firstItem="DVd-zi-OM3" firstAttribute="bottom" secondItem="lin-cP-mFC" secondAttribute="bottom" constant="66" id="g63-nO-Plj"/>
                             <constraint firstItem="EGn-Fe-cAz" firstAttribute="trailing" secondItem="DVd-zi-OM3" secondAttribute="trailing" id="gml-Sm-4cU"/>
                             <constraint firstItem="EGn-Fe-cAz" firstAttribute="leading" secondItem="DVd-zi-OM3" secondAttribute="leading" id="pWG-21-Qbu"/>
+                            <constraint firstItem="lin-cP-mFC" firstAttribute="top" secondItem="EGn-Fe-cAz" secondAttribute="bottom" constant="62" id="taF-VD-gQv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pV3-Uo-TDv"/>
                     <connections>
                         <outlet property="draftImageView" destination="EGn-Fe-cAz" id="CWm-ya-GAj"/>
+                        <outlet property="optionCollectionView" destination="lin-cP-mFC" id="vHV-bM-0gv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4QQ-CF-S7m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -94,6 +129,12 @@
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>
