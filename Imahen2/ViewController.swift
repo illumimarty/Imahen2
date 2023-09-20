@@ -10,37 +10,36 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     var imageToSend: UIImage?
-    var imagePickerController: UIImagePickerController?
-    var alertController: UIAlertController?
+    
+    // lazy: will load when it's actually called
+    private lazy var imagePickerController: UIImagePickerController! = {
+        let vc = UIImagePickerController()
+        vc.allowsEditing = true
+        return vc
+    }()
+    
+    private lazy var alertController: UIAlertController! = {
+        let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let ipc = self.imagePickerController!
+        let libraryAction = UIAlertAction(title: "Choose from Album", style: .default) { action in
+            ipc.sourceType = .photoLibrary
+            self.present(ipc, animated: true)
+        }
+        let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { action in
+            ipc.sourceType = .camera
+            self.present(ipc, animated: true)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        controller.addAction(libraryAction)
+        controller.addAction(cameraAction)
+        controller.addAction(cancelAction)
+        return controller
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        imagePickerController = {
-            let vc = UIImagePickerController()
-            vc.delegate = self
-            vc.allowsEditing = true
-            return vc
-        }()!
-        
-        alertController = {
-            let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let ipc = self.imagePickerController!
-            let libraryAction = UIAlertAction(title: "Choose from Album", style: .default) { action in
-                ipc.sourceType = .photoLibrary
-                self.present(ipc, animated: true)
-            }
-            let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { action in
-                ipc.sourceType = .camera
-                self.present(ipc, animated: true)
-            }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-            controller.addAction(libraryAction)
-            controller.addAction(cameraAction)
-            controller.addAction(cancelAction)
-            return controller
-        }()!
+        imagePickerController.delegate = self
     }
 
     

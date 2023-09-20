@@ -17,5 +17,6 @@ class OptionCell: UICollectionViewCell {
         super.awakeFromNib()
         
         optionImage.image = img
+        self.layer.cornerRadius = 8.0
     }
 }
