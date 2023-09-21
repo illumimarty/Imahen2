@@ -16,6 +16,7 @@
 		991354882AB7A44900EE7FB3 /* DraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991354872AB7A44900EE7FB3 /* DraftViewController.swift */; };
 		99AB96B62AB8029C0032B3B0 /* OptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99AB96B52AB8029C0032B3B0 /* OptionCell.xib */; };
 		99AB96B82AB803DA0032B3B0 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96B72AB803DA0032B3B0 /* OptionCell.swift */; };
+		99AB96C12ABCFD4F0032B3B0 /* ImahenFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		991354872AB7A44900EE7FB3 /* DraftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftViewController.swift; sourceTree = "<group>"; };
 		99AB96B52AB8029C0032B3B0 /* OptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCell.xib; sourceTree = "<group>"; };
 		99AB96B72AB803DA0032B3B0 /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
+		99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImahenFilter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +64,43 @@
 		991354702AB78AD800EE7FB3 /* Imahen2 */ = {
 			isa = PBXGroup;
 			children = (
+				99AB96BF2ABCFD350032B3B0 /* Model */,
+				99AB96BA2ABAB74B0032B3B0 /* View */,
+				99AB96B92ABAB73C0032B3B0 /* Controllers */,
 				991354712AB78AD800EE7FB3 /* AppDelegate.swift */,
 				991354732AB78AD800EE7FB3 /* SceneDelegate.swift */,
-				991354752AB78AD800EE7FB3 /* ViewController.swift */,
-				991354872AB7A44900EE7FB3 /* DraftViewController.swift */,
-				99AB96B52AB8029C0032B3B0 /* OptionCell.xib */,
-				99AB96B72AB803DA0032B3B0 /* OptionCell.swift */,
 				991354772AB78AD800EE7FB3 /* Main.storyboard */,
 				9913547A2AB78ADA00EE7FB3 /* Assets.xcassets */,
 				9913547C2AB78ADA00EE7FB3 /* LaunchScreen.storyboard */,
 				9913547F2AB78ADA00EE7FB3 /* Info.plist */,
 			);
 			path = Imahen2;
+			sourceTree = "<group>";
+		};
+		99AB96B92ABAB73C0032B3B0 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				991354752AB78AD800EE7FB3 /* ViewController.swift */,
+				991354872AB7A44900EE7FB3 /* DraftViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		99AB96BA2ABAB74B0032B3B0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99AB96B52AB8029C0032B3B0 /* OptionCell.xib */,
+				99AB96B72AB803DA0032B3B0 /* OptionCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99AB96BF2ABCFD350032B3B0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99AB96B82AB803DA0032B3B0 /* OptionCell.swift in Sources */,
+				99AB96C12ABCFD4F0032B3B0 /* ImahenFilter.swift in Sources */,
 				991354882AB7A44900EE7FB3 /* DraftViewController.swift in Sources */,
 				991354762AB78AD800EE7FB3 /* ViewController.swift in Sources */,
 				991354722AB78AD800EE7FB3 /* AppDelegate.swift in Sources */,

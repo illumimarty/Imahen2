@@ -64,4 +64,9 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let idx = indexPath.item
+        print(idx)
+    }
 }
