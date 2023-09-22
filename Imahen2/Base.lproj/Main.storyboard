@@ -81,21 +81,34 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrm-TG-N9H">
+                                <rect key="frame" x="5" y="544" width="86" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system" title="Filters"/>
+                                <connections>
+                                    <action selector="backToFiltersButtonTapped:" destination="0Kn-yg-KHw" eventType="touchUpInside" id="WZw-KU-WwR"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DVd-zi-OM3"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lin-cP-mFC" firstAttribute="trailing" secondItem="EGn-Fe-cAz" secondAttribute="trailing" id="1LO-F6-td1"/>
+                            <constraint firstItem="lin-cP-mFC" firstAttribute="top" secondItem="lrm-TG-N9H" secondAttribute="bottom" constant="16" id="5KJ-I2-u9r"/>
                             <constraint firstItem="EGn-Fe-cAz" firstAttribute="top" secondItem="DVd-zi-OM3" secondAttribute="top" constant="32" id="7Nt-UX-Cgn"/>
                             <constraint firstItem="lin-cP-mFC" firstAttribute="leading" secondItem="EGn-Fe-cAz" secondAttribute="leading" id="967-lr-UXs"/>
+                            <constraint firstItem="lrm-TG-N9H" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVd-zi-OM3" secondAttribute="leading" id="D5l-FG-0r5"/>
+                            <constraint firstItem="lrm-TG-N9H" firstAttribute="top" secondItem="EGn-Fe-cAz" secondAttribute="bottom" constant="16" id="YaD-MX-SM0"/>
                             <constraint firstItem="DVd-zi-OM3" firstAttribute="bottom" secondItem="lin-cP-mFC" secondAttribute="bottom" constant="66" id="g63-nO-Plj"/>
                             <constraint firstItem="EGn-Fe-cAz" firstAttribute="trailing" secondItem="DVd-zi-OM3" secondAttribute="trailing" id="gml-Sm-4cU"/>
                             <constraint firstItem="EGn-Fe-cAz" firstAttribute="leading" secondItem="DVd-zi-OM3" secondAttribute="leading" id="pWG-21-Qbu"/>
                             <constraint firstItem="lin-cP-mFC" firstAttribute="top" secondItem="EGn-Fe-cAz" secondAttribute="bottom" constant="62" id="taF-VD-gQv"/>
+                            <constraint firstItem="DVd-zi-OM3" firstAttribute="trailing" secondItem="lrm-TG-N9H" secondAttribute="trailing" constant="302" id="vNm-b1-Fbs"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pV3-Uo-TDv"/>
                     <connections>
+                        <outlet property="backToFilterCategoriesButton" destination="lrm-TG-N9H" id="nPf-ei-60b"/>
                         <outlet property="draftImageView" destination="EGn-Fe-cAz" id="CWm-ya-GAj"/>
                         <outlet property="optionCollectionView" destination="lin-cP-mFC" id="vHV-bM-0gv"/>
                     </connections>
@@ -124,6 +137,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
