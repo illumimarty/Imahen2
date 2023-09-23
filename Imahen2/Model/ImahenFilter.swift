@@ -45,8 +45,8 @@ struct ImahenFilter {
     
     func processImage(_ img: CIImage, _ val: Any? = nil) -> UIImage! {
         var processedImage: UIImage? = nil
-        let context = CIContext() // consider putting this as a global var upon startup, as it's expensive to create
-        
+
+        let context = ImahenCIContext.shared.context
         if let val = val {
             // TODO: add data type checking -> going to use a slider component
             filter?.setValue(val, forKey: kCIInputIntensityKey)
@@ -93,4 +93,12 @@ struct ImahenFilterCategory {
             self.icon = UIImage(systemName: name)
         }
     }
+}
+
+class ImahenCIContext {
+    // Singleton instance
+    static let shared = ImahenCIContext()
+    private init() {}
+    
+    let context = CIContext()
 }
