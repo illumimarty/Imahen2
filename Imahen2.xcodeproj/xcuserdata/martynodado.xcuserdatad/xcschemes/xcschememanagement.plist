@@ -7,7 +7,35 @@
 		<key>Imahen2.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Imahen2Tests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>Imahen2UITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>9913546D2AB78AD800EE7FB3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>99AB96CB2ABE697C0032B3B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>99AB96D82ABE70D30032B3B0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>

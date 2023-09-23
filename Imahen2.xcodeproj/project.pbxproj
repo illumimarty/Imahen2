@@ -17,7 +17,27 @@
 		99AB96C12ABCFD4F0032B3B0 /* ImahenFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */; };
 		99AB96C32ABD00BF0032B3B0 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96C22ABD00BF0032B3B0 /* OptionCell.swift */; };
 		99AB96C52ABD02980032B3B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96C42ABD02980032B3B0 /* ViewController.swift */; };
+		99AB96CF2ABE697C0032B3B0 /* Imahen2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96CE2ABE697C0032B3B0 /* Imahen2Tests.swift */; };
+		99AB96DC2ABE70D30032B3B0 /* Imahen2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96DB2ABE70D30032B3B0 /* Imahen2UITests.swift */; };
+		99AB96DE2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96DD2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		99AB96D02ABE697C0032B3B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 991354662AB78AD800EE7FB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9913546D2AB78AD800EE7FB3;
+			remoteInfo = Imahen2;
+		};
+		99AB96DF2ABE70D30032B3B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 991354662AB78AD800EE7FB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9913546D2AB78AD800EE7FB3;
+			remoteInfo = Imahen2;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9913546E2AB78AD800EE7FB3 /* Imahen2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imahen2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,10 +52,29 @@
 		99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImahenFilter.swift; sourceTree = "<group>"; };
 		99AB96C22ABD00BF0032B3B0 /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
 		99AB96C42ABD02980032B3B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		99AB96CC2ABE697C0032B3B0 /* Imahen2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Imahen2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		99AB96CE2ABE697C0032B3B0 /* Imahen2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imahen2Tests.swift; sourceTree = "<group>"; };
+		99AB96D92ABE70D30032B3B0 /* Imahen2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Imahen2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		99AB96DB2ABE70D30032B3B0 /* Imahen2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imahen2UITests.swift; sourceTree = "<group>"; };
+		99AB96DD2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imahen2UITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9913546B2AB78AD800EE7FB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99AB96C92ABE697C0032B3B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99AB96D62ABE70D30032B3B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -49,6 +88,8 @@
 			isa = PBXGroup;
 			children = (
 				991354702AB78AD800EE7FB3 /* Imahen2 */,
+				99AB96CD2ABE697C0032B3B0 /* Imahen2Tests */,
+				99AB96DA2ABE70D30032B3B0 /* Imahen2UITests */,
 				9913546F2AB78AD800EE7FB3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -57,6 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				9913546E2AB78AD800EE7FB3 /* Imahen2.app */,
+				99AB96CC2ABE697C0032B3B0 /* Imahen2Tests.xctest */,
+				99AB96D92ABE70D30032B3B0 /* Imahen2UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,6 +107,7 @@
 		991354702AB78AD800EE7FB3 /* Imahen2 */ = {
 			isa = PBXGroup;
 			children = (
+				99AB96C72ABE690D0032B3B0 /* Tests */,
 				99AB96BF2ABCFD350032B3B0 /* Model */,
 				99AB96BA2ABAB74B0032B3B0 /* View */,
 				99AB96B92ABAB73C0032B3B0 /* Controllers */,
@@ -103,6 +147,30 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		99AB96C72ABE690D0032B3B0 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		99AB96CD2ABE697C0032B3B0 /* Imahen2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				99AB96CE2ABE697C0032B3B0 /* Imahen2Tests.swift */,
+			);
+			path = Imahen2Tests;
+			sourceTree = "<group>";
+		};
+		99AB96DA2ABE70D30032B3B0 /* Imahen2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				99AB96DB2ABE70D30032B3B0 /* Imahen2UITests.swift */,
+				99AB96DD2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift */,
+			);
+			path = Imahen2UITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -123,6 +191,42 @@
 			productReference = 9913546E2AB78AD800EE7FB3 /* Imahen2.app */;
 			productType = "com.apple.product-type.application";
 		};
+		99AB96CB2ABE697C0032B3B0 /* Imahen2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99AB96D22ABE697C0032B3B0 /* Build configuration list for PBXNativeTarget "Imahen2Tests" */;
+			buildPhases = (
+				99AB96C82ABE697C0032B3B0 /* Sources */,
+				99AB96C92ABE697C0032B3B0 /* Frameworks */,
+				99AB96CA2ABE697C0032B3B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				99AB96D12ABE697C0032B3B0 /* PBXTargetDependency */,
+			);
+			name = Imahen2Tests;
+			productName = Imahen2Tests;
+			productReference = 99AB96CC2ABE697C0032B3B0 /* Imahen2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		99AB96D82ABE70D30032B3B0 /* Imahen2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99AB96E12ABE70D30032B3B0 /* Build configuration list for PBXNativeTarget "Imahen2UITests" */;
+			buildPhases = (
+				99AB96D52ABE70D30032B3B0 /* Sources */,
+				99AB96D62ABE70D30032B3B0 /* Frameworks */,
+				99AB96D72ABE70D30032B3B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				99AB96E02ABE70D30032B3B0 /* PBXTargetDependency */,
+			);
+			name = Imahen2UITests;
+			productName = Imahen2UITests;
+			productReference = 99AB96D92ABE70D30032B3B0 /* Imahen2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -135,6 +239,14 @@
 				TargetAttributes = {
 					9913546D2AB78AD800EE7FB3 = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					99AB96CB2ABE697C0032B3B0 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 9913546D2AB78AD800EE7FB3;
+					};
+					99AB96D82ABE70D30032B3B0 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = 9913546D2AB78AD800EE7FB3;
 					};
 				};
 			};
@@ -152,6 +264,8 @@
 			projectRoot = "";
 			targets = (
 				9913546D2AB78AD800EE7FB3 /* Imahen2 */,
+				99AB96CB2ABE697C0032B3B0 /* Imahen2Tests */,
+				99AB96D82ABE70D30032B3B0 /* Imahen2UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -165,6 +279,20 @@
 				9913547E2AB78ADA00EE7FB3 /* LaunchScreen.storyboard in Resources */,
 				9913547B2AB78ADA00EE7FB3 /* Assets.xcassets in Resources */,
 				991354792AB78AD800EE7FB3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99AB96CA2ABE697C0032B3B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99AB96D72ABE70D30032B3B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +312,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		99AB96C82ABE697C0032B3B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99AB96CF2ABE697C0032B3B0 /* Imahen2Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99AB96D52ABE70D30032B3B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99AB96DC2ABE70D30032B3B0 /* Imahen2UITests.swift in Sources */,
+				99AB96DE2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		99AB96D12ABE697C0032B3B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9913546D2AB78AD800EE7FB3 /* Imahen2 */;
+			targetProxy = 99AB96D02ABE697C0032B3B0 /* PBXContainerItemProxy */;
+		};
+		99AB96E02ABE70D30032B3B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9913546D2AB78AD800EE7FB3 /* Imahen2 */;
+			targetProxy = 99AB96DF2ABE70D30032B3B0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		991354772AB78AD800EE7FB3 /* Main.storyboard */ = {
@@ -379,6 +537,76 @@
 			};
 			name = Release;
 		};
+		99AB96D32ABE697C0032B3B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XHF28X4N49;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Imahen2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Imahen2";
+			};
+			name = Debug;
+		};
+		99AB96D42ABE697C0032B3B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XHF28X4N49;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Imahen2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Imahen2";
+			};
+			name = Release;
+		};
+		99AB96E22ABE70D30032B3B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XHF28X4N49;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Imahen2;
+			};
+			name = Debug;
+		};
+		99AB96E32ABE70D30032B3B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XHF28X4N49;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2UITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Imahen2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -396,6 +624,24 @@
 			buildConfigurations = (
 				991354832AB78ADA00EE7FB3 /* Debug */,
 				991354842AB78ADA00EE7FB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99AB96D22ABE697C0032B3B0 /* Build configuration list for PBXNativeTarget "Imahen2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99AB96D32ABE697C0032B3B0 /* Debug */,
+				99AB96D42ABE697C0032B3B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99AB96E12ABE70D30032B3B0 /* Build configuration list for PBXNativeTarget "Imahen2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99AB96E22ABE70D30032B3B0 /* Debug */,
+				99AB96E32ABE70D30032B3B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

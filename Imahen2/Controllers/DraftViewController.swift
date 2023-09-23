@@ -17,25 +17,35 @@ class DraftViewController: UIViewController {
     
     var draftImage: UIImage?
     var selectedCategory: Category?
-    var isOnCategoryLevel = true
-    var isOnFilterLevel = false
+    var isOnMainLevel = true
     
     let optionCategories: [ImahenFilterCategory] = {
-        
         let myFilterCategory = [
-            ImahenFilter(name: "Claredon", previewImg: UIImage(systemName: "camera.filters"))
+            ImahenFilter(name: "Normal", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Grayscale", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Sepia", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Clarendon", previewImg: UIImage(systemName: "camera.filters"))
+        ]
+        
+        let advancedCategory = [
+            ImahenFilter(name: "Normal", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "xGradient", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "yGradient", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Sobel", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Otsu", previewImg: UIImage(systemName: "camera.filters"))
         ]
         
         let categories: [ImahenFilterCategory] = [
             ImahenFilterCategory(name: "Filter", iconName: "camera.filters", filters: myFilterCategory),
             ImahenFilterCategory(name: "Enhance", iconName: "wand.and.rays", filters: nil),
-            ImahenFilterCategory(name: "Advanced", iconName: "square.3.layers.3d.middle.filled", filters: nil),
+            ImahenFilterCategory(name: "Advanced", iconName: "square.3.layers.3d.middle.filled", filters: advancedCategory),
         ]
         
         return categories
     }()
     
     private lazy var compositionalLayout: UICollectionViewCompositionalLayout = {
+        
         let fraction: CGFloat = 1 / 3
         let inset: CGFloat = 2.5
         
@@ -51,17 +61,16 @@ class DraftViewController: UIViewController {
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary   // Scrolls in orthogonal (horizontal) direction, snaps to lea
 
         let layout = UICollectionViewCompositionalLayout(section: section)
-        
         return UICollectionViewCompositionalLayout(section: section)
     }()
 
     
     @IBAction func backToFiltersButtonTapped(_ sender: Any) {
-        if (isOnFilterLevel) {
-            isOnCategoryLevel = !isOnCategoryLevel
-            isOnFilterLevel = !isOnFilterLevel
+        if (!isOnMainLevel) {
+            toggleLevel()
             selectedCategory = nil
             toggleBackToFilterCategoriesButton()
             reloadCollectionView()
@@ -116,10 +125,11 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.item
         selectedCategory = optionCategories[idx]
-        isOnFilterLevel = true
-        isOnCategoryLevel = false
-        if isOnFilterLevel {
+        toggleLevel()
+        
+        if isOnMainLevel {
             toggleBackToFilterCategoriesButton()
+            toggleCollectionViewScroll()
         }
         reloadCollectionView()
     }
@@ -130,5 +140,13 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func toggleBackToFilterCategoriesButton() {
         backToFilterCategoriesButton.isHidden = !backToFilterCategoriesButton.isHidden
+    }
+    
+    func toggleCollectionViewScroll() {
+        optionCollectionView.isScrollEnabled = !optionCollectionView.isScrollEnabled
+    }
+    
+    func toggleLevel() {
+        isOnMainLevel = !isOnMainLevel
     }
 }
