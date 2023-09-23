@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreImage
 
 class DraftViewController: UIViewController {
     
@@ -15,16 +16,23 @@ class DraftViewController: UIViewController {
     @IBOutlet weak var backToFilterCategoriesButton: UIButton!
     @IBOutlet weak var draftImageView: UIImageView!
     
-    var draftImage: UIImage?
+    var originalImage: UIImage?
     var selectedCategory: Category?
     var isOnMainLevel = true
     
     let optionCategories: [ImahenFilterCategory] = {
         let myFilterCategory = [
             ImahenFilter(name: "Normal", previewImg: UIImage(systemName: "camera.filters")),
-            ImahenFilter(name: "Grayscale", previewImg: UIImage(systemName: "camera.filters")),
-            ImahenFilter(name: "Sepia", previewImg: UIImage(systemName: "camera.filters")),
-            ImahenFilter(name: "Clarendon", previewImg: UIImage(systemName: "camera.filters"))
+            ImahenFilter(
+                name: "Grayscale",
+                previewImg: UIImage(systemName: "camera.filters"),
+                filter: CIFilter(name: "CIPhotoEffectNoir")
+            ),
+            ImahenFilter(
+                name: "Sepia",
+                previewImg: UIImage(systemName: "camera.filters"),
+                filter: CIFilter(name: "CISepiaTone")
+            ),
         ]
         
         let advancedCategory = [
@@ -73,6 +81,7 @@ class DraftViewController: UIViewController {
             toggleLevel()
             selectedCategory = nil
             toggleBackToFilterCategoriesButton()
+            toggleCollectionViewScroll()
             reloadCollectionView()
         }
     }
@@ -82,7 +91,8 @@ class DraftViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
-        draftImageView.image = draftImage
+        view.accessibilityIdentifier = "DraftViewController"
+        draftImageView.image = originalImage
         backToFilterCategoriesButton.isHidden = true
         
         optionCollectionView.delegate = self
@@ -90,6 +100,22 @@ class DraftViewController: UIViewController {
         optionCollectionView.isScrollEnabled = false
         optionCollectionView.register(UINib(nibName: "OptionCell", bundle: .main), forCellWithReuseIdentifier: "OptionCell")
         optionCollectionView.collectionViewLayout = compositionalLayout
+    }
+    
+    func reloadCollectionView() {
+        optionCollectionView.reloadData()
+    }
+    
+    func toggleBackToFilterCategoriesButton() {
+        backToFilterCategoriesButton.isHidden = !backToFilterCategoriesButton.isHidden
+    }
+    
+    func toggleCollectionViewScroll() {
+        optionCollectionView.isScrollEnabled = !optionCollectionView.isScrollEnabled
+    }
+    
+    func toggleLevel() {
+        isOnMainLevel = !isOnMainLevel
     }
 }
 
@@ -124,29 +150,29 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.item
-        selectedCategory = optionCategories[idx]
-        toggleLevel()
-        
+
         if isOnMainLevel {
+            selectedCategory = optionCategories[idx]
+            toggleLevel()
             toggleBackToFilterCategoriesButton()
             toggleCollectionViewScroll()
+            reloadCollectionView()
+        } else {
+            // Apply filter / effect
+            
+            // Case: if normal effect is selected
+            if idx == 0 {
+                draftImageView.image = originalImage
+                return
+            }
+           
+            if let selectedFilter = selectedCategory?.filters![idx] {
+                // TODO: Write condition that prevents further filtering after one application. OR utilize a slider
+                let image = draftImageView.image
+                let filteredImage = selectedFilter.applyEffect(from: image)     // ✨ Where the magic happens ✨
+                draftImageView.image = filteredImage
+                selectedCategory?.filters![idx].toggleIsApplied()
+            }
         }
-        reloadCollectionView()
-    }
-    
-    func reloadCollectionView() {
-        optionCollectionView.reloadData()
-    }
-    
-    func toggleBackToFilterCategoriesButton() {
-        backToFilterCategoriesButton.isHidden = !backToFilterCategoriesButton.isHidden
-    }
-    
-    func toggleCollectionViewScroll() {
-        optionCollectionView.isScrollEnabled = !optionCollectionView.isScrollEnabled
-    }
-    
-    func toggleLevel() {
-        isOnMainLevel = !isOnMainLevel
     }
 }

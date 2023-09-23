@@ -92,7 +92,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
             let draftVC = segue.destination as! DraftViewController
             
             if let img = self.imageToSend {
-                draftVC.draftImage = img
+                draftVC.originalImage = img
             }
         }
     }
