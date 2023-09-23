@@ -8,17 +8,30 @@
 import Foundation
 import CoreImage
 
-class EdgeDetectionKernel: CIImageProcessorKernel {
+class ImahenMetalKernel: CIImageProcessorKernel {
     static let device: MTLDevice? = MTLCreateSystemDefaultDevice()
     static var computePipelineState: MTLComputePipelineState?
-        
+    var metalFunctionName: String
+    
+    override init() {
+        metalFunctionName = ""
+    }
+    
+    init(_ functionName: String!) {
+        metalFunctionName = functionName
+    }
+    
+    func setMetalScheme(to scheme: String) {
+        metalFunctionName = scheme
+    }
+    
     func setupKernel() -> Bool? {
-        if EdgeDetectionKernel.device != nil {
-            guard let defaultLibrary = EdgeDetectionKernel.device?.makeDefaultLibrary() else { return nil }
-            guard let kernelFunction = defaultLibrary.makeFunction(name: "sobelEdgeDetect") else { return nil }
+        if ImahenMetalKernel.device != nil {
+            guard let defaultLibrary = ImahenMetalKernel.device?.makeDefaultLibrary() else { return nil }
+            guard let kernelFunction = defaultLibrary.makeFunction(name: metalFunctionName) else { return nil }
             
             do {
-                EdgeDetectionKernel.computePipelineState = try EdgeDetectionKernel.device?.makeComputePipelineState(function: kernelFunction)
+                ImahenMetalKernel.computePipelineState = try ImahenMetalKernel.device?.makeComputePipelineState(function: kernelFunction)
             } catch {
                 print("Failed to create compute pipeline state: \(error.localizedDescription)")
                 return false
@@ -32,10 +45,11 @@ class EdgeDetectionKernel: CIImageProcessorKernel {
     }
     
     override class func process(with inputs: [CIImageProcessorInput]?, arguments: [String : Any]?, output: CIImageProcessorOutput) throws {
-        let kernel = EdgeDetectionKernel()
+        let kernel = ImahenMetalKernel()
+        kernel.setMetalScheme(to: arguments!["functionName"] as! String)
         
         if kernel.setupKernel() != nil {
-            if EdgeDetectionKernel.computePipelineState == nil { return }
+            if ImahenMetalKernel.computePipelineState == nil { return }
         }
         
         let commandQueue = self.device?.makeCommandQueue()
@@ -68,7 +82,7 @@ class EdgeDetectionKernel: CIImageProcessorKernel {
         
         // Creating the ComputeEncoder
         if let computeEncoder = commandBuffer.makeComputeCommandEncoder() {
-            computeEncoder.setComputePipelineState(EdgeDetectionKernel.computePipelineState!)
+            computeEncoder.setComputePipelineState(ImahenMetalKernel.computePipelineState!)
             computeEncoder.setTextures([srcTexture, dstTexture], range: 0..<2)
             computeEncoder.dispatchThreadgroups(threadsPerGrid, threadsPerThreadgroup: threadsPerThreadgroup)
             computeEncoder.endEncoding()

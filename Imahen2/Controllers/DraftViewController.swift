@@ -39,7 +39,7 @@ class DraftViewController: UIViewController {
             ImahenFilter(name: "Normal", previewImg: UIImage(systemName: "camera.filters")),
             ImahenFilter(name: "xGradient", previewImg: UIImage(systemName: "camera.filters")),
             ImahenFilter(name: "yGradient", previewImg: UIImage(systemName: "camera.filters")),
-            ImahenFilter(name: "Sobel", previewImg: UIImage(systemName: "camera.filters")),
+            MetalFilter(name: "Sobel", previewImg: UIImage(systemName: "camera.filters"), threshold: 0.5, scheme: .sobel),
             ImahenFilter(name: "Otsu", previewImg: UIImage(systemName: "camera.filters"))
         ]
         
@@ -166,10 +166,12 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
                 return
             }
            
-            if let selectedFilter = selectedCategory?.filters![idx] {
+            if let selectedFilter = selectedCategory?.filters![idx] as? MetalFilter {
                 // TODO: Write condition that prevents further filtering after one application. OR utilize a slider
                 let image = draftImageView.image
-                let filteredImage = selectedFilter.applyEffect(from: image)     // ✨ Where the magic happens ✨
+//                let filteredImage = selectedFilter.applyEffect(from: image)     // ✨ Where the magic happens ✨
+                let filteredImage = selectedFilter.applyEffect(from: image, val: 0.5)     // ✨ Where the magic happens ✨
+
                 draftImageView.image = filteredImage
                 selectedCategory?.filters![idx].toggleIsApplied()
             }

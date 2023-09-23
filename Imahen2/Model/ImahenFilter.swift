@@ -9,21 +9,23 @@ import Foundation
 import UIKit
 import CoreImage
 
-struct ImahenFilter {
+class ImahenFilter {
     var name: String?
     var previewImg: UIImage?
     var filter: CIFilter?
     var key: String?
     var isAppliedToImage: Bool
+    var threshold: CGFloat?
     
-    init(name: String!, previewImg: UIImage!, filter: CIFilter? = nil) {
+    init(name: String!, previewImg: UIImage!, filter: CIFilter? = nil, thresh: CGFloat? = nil) {
         self.name = name
         self.previewImg = previewImg
         self.filter = filter
         self.isAppliedToImage = false
+        
     }
     
-    func applyEffect(from image: UIImage?, with val: Any? = nil) -> UIImage? {
+    func applyEffect(from image: UIImage?, val: CGFloat? = nil) -> UIImage? {
         guard let image = prepareImage(image) else { return nil }
         return processImage(image, val ?? nil)
     }
@@ -52,6 +54,7 @@ struct ImahenFilter {
             filter?.setValue(val, forKey: kCIInputIntensityKey)
         }
         
+        // Case: using CIFilter with a given CGFloat intensity value
         guard let image = self.filter?.outputImage else { return nil }
         if let key = self.key {
             filter?.setValue(val, forKey: key)
@@ -64,7 +67,7 @@ struct ImahenFilter {
         return processedImage
     }
     
-    mutating func toggleIsApplied() {
+    func toggleIsApplied() {
         isAppliedToImage = !isAppliedToImage
     }
 }
@@ -101,4 +104,62 @@ class ImahenCIContext {
     private init() {}
     
     let context = CIContext()
+}
+
+class MetalFilter: ImahenFilter {
+    enum Scheme {
+        case sobel
+        case xgrad
+        case ygrad
+        case otsu
+    }
+    
+    private let kernel: ImahenMetalKernel
+    var selectedScheme: Scheme?
+
+//    init(name: String!, previewImg: UIImage!) {
+//        kernel = ImahenMetalKernel()
+//        threshold = 0.0
+//        super.init(name: name, previewImg: previewImg)
+//    }
+    
+    init(name: String!, previewImg: UIImage!, threshold: CGFloat = 0.0, scheme: Scheme) {
+        kernel = ImahenMetalKernel()
+        selectedScheme = scheme
+        super.init(name: name, previewImg: previewImg)
+        self.threshold = threshold
+    }
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getMetalFunction(for scheme: Scheme) -> String? {
+        switch scheme {
+        case .sobel: return "sobelEdgeDetect"
+        default: return nil
+        }
+    }
+    
+    override func applyEffect(from image: UIImage?, val: CGFloat? = nil) -> UIImage? {
+        if let val = val {
+            let context = ImahenCIContext.shared.context
+            let schemeFunction = getMetalFunction(for: selectedScheme!)
+//            kernel.setMetalScheme(to: schemeFunction!)
+            guard let image = prepareImage(image) else { return nil }
+            
+            guard let processedImage = try? ImahenMetalKernel.apply(
+                withExtent: image.extent,
+                inputs: [image],
+                arguments: ["thresholdValue": val, "functionName": schemeFunction!])
+            else { return nil }
+            
+            guard let cgImageResult = context.createCGImage(processedImage, from: processedImage.extent) else { return nil }
+            let filteredImage = UIImage(cgImage: cgImageResult)
+            
+            return filteredImage
+        }
+        return nil
+    }
 }

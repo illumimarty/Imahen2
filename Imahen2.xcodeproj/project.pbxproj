@@ -20,7 +20,8 @@
 		99AB96CF2ABE697C0032B3B0 /* Imahen2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96CE2ABE697C0032B3B0 /* Imahen2Tests.swift */; };
 		99AB96DC2ABE70D30032B3B0 /* Imahen2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96DB2ABE70D30032B3B0 /* Imahen2UITests.swift */; };
 		99AB96DE2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96DD2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift */; };
-		99C6DA912ABEAC61006330A7 /* MetalKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C6DA902ABEAC61006330A7 /* MetalKernel.swift */; };
+		99C6DA912ABEAC61006330A7 /* ImahenMetalKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C6DA902ABEAC61006330A7 /* ImahenMetalKernel.swift */; };
+		99C6DA932ABEB041006330A7 /* kernel.metal in Sources */ = {isa = PBXBuildFile; fileRef = 99C6DA922ABEB041006330A7 /* kernel.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +59,8 @@
 		99AB96D92ABE70D30032B3B0 /* Imahen2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Imahen2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99AB96DB2ABE70D30032B3B0 /* Imahen2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imahen2UITests.swift; sourceTree = "<group>"; };
 		99AB96DD2ABE70D30032B3B0 /* Imahen2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Imahen2UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		99C6DA902ABEAC61006330A7 /* MetalKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalKernel.swift; sourceTree = "<group>"; };
+		99C6DA902ABEAC61006330A7 /* ImahenMetalKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImahenMetalKernel.swift; sourceTree = "<group>"; };
+		99C6DA922ABEB041006330A7 /* kernel.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = kernel.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				991354772AB78AD800EE7FB3 /* Main.storyboard */,
 				9913547A2AB78ADA00EE7FB3 /* Assets.xcassets */,
 				9913547C2AB78ADA00EE7FB3 /* LaunchScreen.storyboard */,
+				99C6DA922ABEB041006330A7 /* kernel.metal */,
 				9913547F2AB78ADA00EE7FB3 /* Info.plist */,
 			);
 			path = Imahen2;
@@ -145,7 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */,
-				99C6DA902ABEAC61006330A7 /* MetalKernel.swift */,
+				99C6DA902ABEAC61006330A7 /* ImahenMetalKernel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -306,12 +309,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				99C6DA912ABEAC61006330A7 /* MetalKernel.swift in Sources */,
+				99C6DA912ABEAC61006330A7 /* ImahenMetalKernel.swift in Sources */,
 				99AB96C52ABD02980032B3B0 /* ViewController.swift in Sources */,
 				99AB96C12ABCFD4F0032B3B0 /* ImahenFilter.swift in Sources */,
 				991354882AB7A44900EE7FB3 /* DraftViewController.swift in Sources */,
 				99AB96C32ABD00BF0032B3B0 /* OptionCell.swift in Sources */,
 				991354722AB78AD800EE7FB3 /* AppDelegate.swift in Sources */,
+				99C6DA932ABEB041006330A7 /* kernel.metal in Sources */,
 				991354742AB78AD800EE7FB3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -505,6 +509,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MTLLINKER_FLAGS = "-cikernel";
+				MTL_COMPILER_FLAGS = "-fcikernel";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -533,6 +539,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MTLLINKER_FLAGS = "-cikernel";
+				MTL_COMPILER_FLAGS = "-fcikernel";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
