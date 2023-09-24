@@ -44,7 +44,8 @@ I created this app to explore the uses of common image effects used in CoreImage
 
 ### GIF Demo Walkthrough
 
-![imahen-demo-1](https://github.com/illumimarty/Imahen2/assets/29560438/d2c38edf-260c-485d-b3aa-8e199256d0c1)
+![imahen-demo-1](https://i.imgur.com/gLSCpPU.gif)
+
 
 ### Data Model
 `Imahen Filter`
