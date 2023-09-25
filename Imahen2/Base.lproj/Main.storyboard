@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yRR-yY-asI">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -141,7 +141,13 @@
                             <constraint firstItem="DVd-zi-OM3" firstAttribute="trailing" secondItem="lrm-TG-N9H" secondAttribute="trailing" constant="302" id="vNm-b1-Fbs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="pV3-Uo-TDv"/>
+                    <navigationItem key="navigationItem" id="pV3-Uo-TDv">
+                        <barButtonItem key="rightBarButtonItem" title="Export" id="XS6-pw-RLV">
+                            <connections>
+                                <action selector="didTapExport:" destination="0Kn-yg-KHw" id="dWl-eK-jvS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="backToFilterCategoriesButton" destination="lrm-TG-N9H" id="nPf-ei-60b"/>
                         <outlet property="longPressGestureRecognizer" destination="SZI-ci-EVL" id="YTE-QA-vxs"/>

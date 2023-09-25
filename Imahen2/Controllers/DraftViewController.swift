@@ -24,7 +24,7 @@ class DraftViewController: UIViewController {
     var selectedFilter: ImahenFilter?
     var isOnMainLevel = true
     
-    let optionCategories: [ImahenFilterCategory] = {
+    let optionCategories: [Category] = {
         var filterData: [(name: String, previewImg: UIImage?, filter: CIFilter?, usesIntensity: Bool)] = [
             ("Normal", UIImage(systemName: "camera.filters"), nil, false),
             ("Grayscale", UIImage(systemName: "camera.filters"), CIFilter(name: "CIPhotoEffectNoir"), false),
@@ -57,10 +57,10 @@ class DraftViewController: UIViewController {
             MetalFilter(name: "Otsu", previewImg: UIImage(systemName: "camera.filters"))
         ]
         
-        let categories: [ImahenFilterCategory] = [
-            ImahenFilterCategory(name: "Filter", iconName: "camera.filters", filters: myFilterCategory),
-            ImahenFilterCategory(name: "Enhance", iconName: "wand.and.rays", filters: enhanceCategory),
-            ImahenFilterCategory(name: "Advanced", iconName: "square.3.layers.3d.middle.filled", filters: advancedCategory),
+        let categories: [Category] = [
+            Category(name: "Filter", iconName: "camera.filters", filters: myFilterCategory),
+            Category(name: "Enhance", iconName: "wand.and.rays", filters: enhanceCategory),
+            Category(name: "Advanced", iconName: "square.3.layers.3d.middle.filled", filters: advancedCategory),
         ]
         
         return categories
@@ -120,7 +120,7 @@ class DraftViewController: UIViewController {
             toggleLevel()
             selectedCategory = nil
             toggleBackToFilterCategoriesButton()
-            toggleCollectionViewScroll()
+//            toggleCollectionViewScroll()
             reloadCollectionView()
         }
     }
@@ -148,6 +148,12 @@ class DraftViewController: UIViewController {
     @IBAction func didSliderValueChange(_ sender: Any) {
         let val = CGFloat(slider.value)
         processImage(with: val)
+    }
+    
+    @IBAction func didTapExport(_ sender: Any) {
+        let finalImage = draftImage
+        let ac = UIActivityViewController(activityItems: [finalImage], applicationActivities: nil)
+        present(ac, animated: true)
     }
     
     func reloadCollectionView() {
@@ -251,7 +257,7 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             selectedCategory = optionCategories[idx]
             toggleLevel()
             toggleBackToFilterCategoriesButton()
-            toggleCollectionViewScroll()
+//            toggleCollectionViewScroll()
             reloadCollectionView()
         } else {
             
@@ -268,6 +274,11 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
                 if selectedFilter.filterType == .metal {
                     let filter = selectedFilter as! MetalFilter     // cool use for appropriate forced downcasting!
                     if filter.selectedScheme == nil {
+                        print("Filter not yet implemented, returning...")
+                        return
+                    }
+                } else {
+                    if selectedFilter.filter == nil {
                         print("Filter not yet implemented, returning...")
                         return
                     }
