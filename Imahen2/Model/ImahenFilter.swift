@@ -15,19 +15,51 @@ class ImahenFilter {
     var filter: CIFilter?
     var key: String?
     var isAppliedToImage: Bool
+    var doesUseIntensity: Bool
     var threshold: CGFloat?
+    var filterType: FilterType
     
-    init(name: String!, previewImg: UIImage!, filter: CIFilter? = nil, thresh: CGFloat? = nil) {
+    enum FilterType {
+        case coreImage
+        case metal
+    }
+    
+    init(
+        name: String!,
+        previewImg: UIImage!,
+        filter: CIFilter? = nil,
+        thresh: CGFloat? = nil,
+        usesIntensity: Bool = false) {
         self.name = name
         self.previewImg = previewImg
         self.filter = filter
         self.isAppliedToImage = false
-        
+        self.filterType = .coreImage
+        self.doesUseIntensity = usesIntensity
     }
     
-    func applyEffect(from image: UIImage?, val: CGFloat? = nil) -> UIImage? {
+    init(
+        _ name: String!,
+        _ previewImg: UIImage!,
+        _ filter: CIFilter? = nil,
+        _ thresh: CGFloat? = nil,
+        _ usesIntensity: Bool = false) {
+        self.name = name
+        self.previewImg = previewImg
+        self.filter = filter
+        self.isAppliedToImage = false
+        self.filterType = .coreImage
+        self.doesUseIntensity = usesIntensity
+    }
+    
+    func applyEffect(to image: UIImage?, val: CGFloat? = nil) -> UIImage? {
         guard let image = prepareImage(image) else { return nil }
-        return processImage(image, val ?? nil)
+        
+        // Check if filter is set, dev-use only
+        if filter != nil {
+            return processImage(image, val ?? nil)
+        }
+        return nil
     }
     
     func removeEffect(from image: UIImage) {
@@ -45,7 +77,8 @@ class ImahenFilter {
         return preprocessedImage
     }
     
-    func processImage(_ img: CIImage, _ val: Any? = nil) -> UIImage! {
+    /// Used by `ImahenFilter` to apply the filter to image using CoreImage
+    private func processImage(_ img: CIImage, _ val: Any? = nil) -> UIImage! {
         var processedImage: UIImage? = nil
 
         let context = ImahenCIContext.shared.context
@@ -73,19 +106,19 @@ class ImahenFilter {
 }
 
 struct ImahenFilterCategory {
-    enum filterCategory {
-        case filter
-        case enhance
-        case advanced
-        case none
-    }
-    
     var name: String?
     var iconName: String?
     var icon: UIImage?
     var category: filterCategory
     var filters: [ImahenFilter]?
     
+    enum filterCategory {
+        case filter
+        case enhance
+        case advanced
+        case none
+    }
+        
     init(name: String? = nil, iconName: String? = nil, filters: [ImahenFilter]? = nil) {
         self.name = name
         self.filters = filters
@@ -107,6 +140,9 @@ class ImahenCIContext {
 }
 
 class MetalFilter: ImahenFilter {
+    private let kernel: ImahenMetalKernel
+    var selectedScheme: Scheme?
+    
     enum Scheme {
         case sobel
         case xgrad
@@ -114,22 +150,13 @@ class MetalFilter: ImahenFilter {
         case otsu
     }
     
-    private let kernel: ImahenMetalKernel
-    var selectedScheme: Scheme?
-
-//    init(name: String!, previewImg: UIImage!) {
-//        kernel = ImahenMetalKernel()
-//        threshold = 0.0
-//        super.init(name: name, previewImg: previewImg)
-//    }
-    
-    init(name: String!, previewImg: UIImage!, threshold: CGFloat = 0.0, scheme: Scheme) {
+    init(name: String!, previewImg: UIImage!, threshold: CGFloat? = 0.0, scheme: Scheme) {
         kernel = ImahenMetalKernel()
         selectedScheme = scheme
         super.init(name: name, previewImg: previewImg)
+        self.filterType = .metal
         self.threshold = threshold
     }
-    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -142,13 +169,13 @@ class MetalFilter: ImahenFilter {
         }
     }
     
-    override func applyEffect(from image: UIImage?, val: CGFloat? = nil) -> UIImage? {
+    override func applyEffect(to image: UIImage?, val: CGFloat? = nil) -> UIImage? {
         if let val = val {
             let context = ImahenCIContext.shared.context
             let schemeFunction = getMetalFunction(for: selectedScheme!)
-//            kernel.setMetalScheme(to: schemeFunction!)
             guard let image = prepareImage(image) else { return nil }
             
+            // Calls Metal kernel to process image on GPU
             guard let processedImage = try? ImahenMetalKernel.apply(
                 withExtent: image.extent,
                 inputs: [image],
@@ -156,9 +183,7 @@ class MetalFilter: ImahenFilter {
             else { return nil }
             
             guard let cgImageResult = context.createCGImage(processedImage, from: processedImage.extent) else { return nil }
-            let filteredImage = UIImage(cgImage: cgImageResult)
-            
-            return filteredImage
+            return UIImage(cgImage: cgImageResult)
         }
         return nil
     }

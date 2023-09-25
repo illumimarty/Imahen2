@@ -9,30 +9,43 @@ import UIKit
 import CoreImage
 
 class DraftViewController: UIViewController {
-    
     typealias Category = ImahenFilterCategory
     
     @IBOutlet weak var optionCollectionView: UICollectionView!
     @IBOutlet weak var backToFilterCategoriesButton: UIButton!
-    @IBOutlet weak var draftImageView: UIImageView!
+    @IBOutlet weak var previewImageView: UIImageView!
+    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var toolbar: UIToolbar!
     
     var originalImage: UIImage?
+    var draftImage: UIImage?
     var selectedCategory: Category?
+    var selectedFilter: ImahenFilter?
     var isOnMainLevel = true
     
     let optionCategories: [ImahenFilterCategory] = {
-        let myFilterCategory = [
-            ImahenFilter(name: "Normal", previewImg: UIImage(systemName: "camera.filters")),
-            ImahenFilter(
-                name: "Grayscale",
-                previewImg: UIImage(systemName: "camera.filters"),
-                filter: CIFilter(name: "CIPhotoEffectNoir")
-            ),
-            ImahenFilter(
-                name: "Sepia",
-                previewImg: UIImage(systemName: "camera.filters"),
-                filter: CIFilter(name: "CISepiaTone")
-            ),
+        var filterData: [(name: String, previewImg: UIImage?, filter: CIFilter?, usesIntensity: Bool)] = [
+            ("Normal", UIImage(systemName: "camera.filters"), nil, false),
+            ("Grayscale", UIImage(systemName: "camera.filters"), CIFilter(name: "CIPhotoEffectNoir"), false),
+            ("Sepia", UIImage(systemName: "camera.filters"), CIFilter(name: "CISepiaTone"), true)
+        ]
+        
+        let myFilterCategory = filterData.map { data in
+            return ImahenFilter(data.name, data.previewImg, data.filter, nil, data.usesIntensity)
+        }
+        
+        filterData = [
+            ("Brightness", UIImage(systemName: "camera.filters"), nil, true),
+            ("Contrast", UIImage(systemName: "camera.filters"), nil, true),
+            ("Smoothen", UIImage(systemName: "camera.filters"), CIFilter(name: "CIGaussianBlur", parameters: [:]), true),
+            ("Sharpen", UIImage(systemName: "camera.filters"), nil, true)
+        ]
+        
+        let enhanceCategory = [
+            ImahenFilter(name: "Brightness", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Contrast", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Smoothen", previewImg: UIImage(systemName: "camera.filters")),
+            ImahenFilter(name: "Sharpen", previewImg: UIImage(systemName: "camera.filters")),
         ]
         
         let advancedCategory = [
@@ -45,7 +58,7 @@ class DraftViewController: UIViewController {
         
         let categories: [ImahenFilterCategory] = [
             ImahenFilterCategory(name: "Filter", iconName: "camera.filters", filters: myFilterCategory),
-            ImahenFilterCategory(name: "Enhance", iconName: "wand.and.rays", filters: nil),
+            ImahenFilterCategory(name: "Enhance", iconName: "wand.and.rays", filters: enhanceCategory),
             ImahenFilterCategory(name: "Advanced", iconName: "square.3.layers.3d.middle.filled", filters: advancedCategory),
         ]
         
@@ -53,7 +66,6 @@ class DraftViewController: UIViewController {
     }()
     
     private lazy var compositionalLayout: UICollectionViewCompositionalLayout = {
-        
         let fraction: CGFloat = 1 / 3
         let inset: CGFloat = 2.5
         
@@ -69,12 +81,36 @@ class DraftViewController: UIViewController {
         // Section
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
-        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary   // Scrolls in orthogonal (horizontal) direction, snaps to lea
+        section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary   // Scrolls in orthogonal (horizontal) direction, snaps to leading/trailing edges
 
-        let layout = UICollectionViewCompositionalLayout(section: section)
         return UICollectionViewCompositionalLayout(section: section)
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
+        // Do any additional setup after loading the view.
+        view.accessibilityIdentifier = "DraftViewController"
+        draftImage = originalImage
+        previewImageView.image = draftImage
+        
+        // Setting up collection view
+        optionCollectionView.delegate = self
+        optionCollectionView.dataSource = self
+        optionCollectionView.isScrollEnabled = false
+        optionCollectionView.register(UINib(nibName: "OptionCell", bundle: .main), forCellWithReuseIdentifier: "OptionCell")
+        optionCollectionView.collectionViewLayout = compositionalLayout
+        
+        // Setting up slider
+        slider.minimumValue = 0.0
+        slider.maximumValue = 1.0
+        slider.value = 0.5
+        slider.isContinuous = false // make this true if running on device. consider having a simulator/device condition when debugging
+        
+        backToFilterCategoriesButton.isHidden = true
+        toolbar.isHidden = true
+        slider.isHidden = true
+    }
     
     @IBAction func backToFiltersButtonTapped(_ sender: Any) {
         if (!isOnMainLevel) {
@@ -86,20 +122,23 @@ class DraftViewController: UIViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        previewImageView.image = draftImage
+        toggleIntensitySlider()
+    }
 
-        // Do any additional setup after loading the view.
-        
-        view.accessibilityIdentifier = "DraftViewController"
-        draftImageView.image = originalImage
-        backToFilterCategoriesButton.isHidden = true
-        
-        optionCollectionView.delegate = self
-        optionCollectionView.dataSource = self
-        optionCollectionView.isScrollEnabled = false
-        optionCollectionView.register(UINib(nibName: "OptionCell", bundle: .main), forCellWithReuseIdentifier: "OptionCell")
-        optionCollectionView.collectionViewLayout = compositionalLayout
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        draftImage = previewImageView.image
+        toggleIntensitySlider()
+    }
+    
+    @IBAction func didSliderValueChange(_ sender: Any) {
+        let val = CGFloat(slider.value)
+        processImage(with: val)
+    }
+    
+    func revertToOriginalImage() {
+        previewImageView.image = originalImage
     }
     
     func reloadCollectionView() {
@@ -117,6 +156,45 @@ class DraftViewController: UIViewController {
     func toggleLevel() {
         isOnMainLevel = !isOnMainLevel
     }
+    
+    func applyFilterEffectToImage() {
+        previewImageView.image = draftImage
+    }
+    
+    func toggleIntensitySlider() {
+        navigationController?.navigationBar.isHidden = !(navigationController?.navigationBar.isHidden)!
+        slider.isEnabled = !slider.isEnabled
+        toolbar.isHidden = !toolbar.isHidden
+        slider.isHidden = !slider.isHidden
+        
+        if !slider.isHidden {
+            slider.value = 0.5
+            processImage(with: CGFloat(slider.value))
+        }
+        
+        toggleBackToFilterCategoriesButton()
+        optionCollectionView.isHidden = !optionCollectionView.isHidden
+    }
+    
+    /// Used by DraftVC to apply filter to image and preview to ImageView
+    private func processImage(with intensity: CGFloat? = nil) {
+        let currFilter = self.selectedFilter!
+        let image = draftImage
+        var filteredImage: UIImage?
+        
+        if currFilter.doesUseIntensity {
+            filteredImage = currFilter.applyEffect(to: image, val: intensity)
+        } else {
+            filteredImage = currFilter.applyEffect(to: image)   // ✨ Where the magic happens ✨
+            draftImage = filteredImage
+        }
+        
+        if let filteredImage = filteredImage {
+            previewImageView.image = filteredImage
+        } else {
+            print("Filter not applied. Returning original image...")
+        }
+    }
 }
 
 extension DraftViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -133,10 +211,14 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let idx = indexPath.item
         
         switch (selectedCategory) {
+            
+        // Top Level Menu
         case nil:
             let category = optionCategories[idx]
             cell.optionName.text = category.name
             cell.optionImage.image = category.icon
+            
+        // Category menu with filters
         default:
             if let category = selectedCategory {
                 let filter = category.filters?[idx]
@@ -144,10 +226,12 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
                 cell.optionImage.image = filter?.previewImg
             }
         }
-        
         return cell
     }
     
+    
+    /// If `isOnMainLevel`, the collection view's data source will reconfig to the corresponding category's filter list
+    /// Else, it will apply the matching filter to `draftImage`
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let idx = indexPath.item
 
@@ -158,22 +242,21 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             toggleCollectionViewScroll()
             reloadCollectionView()
         } else {
-            // Apply filter / effect
             
             // Case: if normal effect is selected
             if idx == 0 {
-                draftImageView.image = originalImage
+                previewImageView.image = originalImage
                 return
             }
            
-            if let selectedFilter = selectedCategory?.filters![idx] as? MetalFilter {
-                // TODO: Write condition that prevents further filtering after one application. OR utilize a slider
-                let image = draftImageView.image
-//                let filteredImage = selectedFilter.applyEffect(from: image)     // ✨ Where the magic happens ✨
-                let filteredImage = selectedFilter.applyEffect(from: image, val: 0.5)     // ✨ Where the magic happens ✨
-
-                draftImageView.image = filteredImage
-                selectedCategory?.filters![idx].toggleIsApplied()
+            if let selectedFilter = selectedCategory?.filters![idx] {
+                self.selectedFilter = selectedFilter
+                
+                if selectedFilter.doesUseIntensity {
+                    toggleIntensitySlider()
+                } else {
+                    processImage()
+                }
             }
         }
     }

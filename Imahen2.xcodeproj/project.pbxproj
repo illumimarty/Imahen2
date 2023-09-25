@@ -13,6 +13,8 @@
 		9913547B2AB78ADA00EE7FB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9913547A2AB78ADA00EE7FB3 /* Assets.xcassets */; };
 		9913547E2AB78ADA00EE7FB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9913547C2AB78ADA00EE7FB3 /* LaunchScreen.storyboard */; };
 		991354882AB7A44900EE7FB3 /* DraftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991354872AB7A44900EE7FB3 /* DraftViewController.swift */; };
+		9928D00F2AC0F74C0062E7D9 /* OptionSliderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9928D00E2AC0F74C0062E7D9 /* OptionSliderView.xib */; };
+		9928D0112AC0F92C0062E7D9 /* OptionSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928D0102AC0F92C0062E7D9 /* OptionSliderView.swift */; };
 		99AB96B62AB8029C0032B3B0 /* OptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99AB96B52AB8029C0032B3B0 /* OptionCell.xib */; };
 		99AB96C12ABCFD4F0032B3B0 /* ImahenFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */; };
 		99AB96C32ABD00BF0032B3B0 /* OptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AB96C22ABD00BF0032B3B0 /* OptionCell.swift */; };
@@ -50,6 +52,8 @@
 		9913547D2AB78ADA00EE7FB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9913547F2AB78ADA00EE7FB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		991354872AB7A44900EE7FB3 /* DraftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftViewController.swift; sourceTree = "<group>"; };
+		9928D00E2AC0F74C0062E7D9 /* OptionSliderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionSliderView.xib; sourceTree = "<group>"; };
+		9928D0102AC0F92C0062E7D9 /* OptionSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSliderView.swift; sourceTree = "<group>"; };
 		99AB96B52AB8029C0032B3B0 /* OptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionCell.xib; sourceTree = "<group>"; };
 		99AB96C02ABCFD4F0032B3B0 /* ImahenFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImahenFilter.swift; sourceTree = "<group>"; };
 		99AB96C22ABD00BF0032B3B0 /* OptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCell.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 			children = (
 				99AB96B52AB8029C0032B3B0 /* OptionCell.xib */,
 				99AB96C22ABD00BF0032B3B0 /* OptionCell.swift */,
+				9928D00E2AC0F74C0062E7D9 /* OptionSliderView.xib */,
+				9928D0102AC0F92C0062E7D9 /* OptionSliderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 				9913547E2AB78ADA00EE7FB3 /* LaunchScreen.storyboard in Resources */,
 				9913547B2AB78ADA00EE7FB3 /* Assets.xcassets in Resources */,
 				991354792AB78AD800EE7FB3 /* Main.storyboard in Resources */,
+				9928D00F2AC0F74C0062E7D9 /* OptionSliderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +320,7 @@
 				99AB96C52ABD02980032B3B0 /* ViewController.swift in Sources */,
 				99AB96C12ABCFD4F0032B3B0 /* ImahenFilter.swift in Sources */,
 				991354882AB7A44900EE7FB3 /* DraftViewController.swift in Sources */,
+				9928D0112AC0F92C0062E7D9 /* OptionSliderView.swift in Sources */,
 				99AB96C32ABD00BF0032B3B0 /* OptionCell.swift in Sources */,
 				991354722AB78AD800EE7FB3 /* AppDelegate.swift in Sources */,
 				99C6DA932ABEB041006330A7 /* kernel.metal in Sources */,
@@ -509,8 +517,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				MTLLINKER_FLAGS = "-cikernel";
-				MTL_COMPILER_FLAGS = "-fcikernel";
+				MTLLINKER_FLAGS = "";
+				MTL_COMPILER_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -539,8 +547,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				MTLLINKER_FLAGS = "-cikernel";
-				MTL_COMPILER_FLAGS = "-fcikernel";
+				MTLLINKER_FLAGS = "";
+				MTL_COMPILER_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mnodado.Imahen2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
