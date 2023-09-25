@@ -11,7 +11,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
 
     var imageToSend: UIImage?
     
-    // lazy: will load when it's actually called
+    // lazy: will load when it's actually needed
     private lazy var imagePickerController: UIImagePickerController! = {
         let vc = UIImagePickerController()
         vc.allowsEditing = true
@@ -53,13 +53,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     
     // Resizes the selectedImage to a square for editing
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let originalImage = info[.originalImage]
         let editedImage = info[.editedImage] as! UIImage
-        
-        let bounds: CGRect = self.view.window!.bounds
-        let width: CGFloat = bounds.size.width
-        let imageSize: CGSize = CGSizeMake(width, width)
-        imageToSend = resizeImage(editedImage, withSize: imageSize)
+        imageToSend = editedImage
         self.dismiss(animated: true) {
             self.performSegue(withIdentifier: "pickerToDraft", sender: nil)
         }
