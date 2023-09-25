@@ -137,10 +137,6 @@ class DraftViewController: UIViewController {
         processImage(with: val)
     }
     
-    func revertToOriginalImage() {
-        previewImageView.image = originalImage
-    }
-    
     func reloadCollectionView() {
         optionCollectionView.reloadData()
     }
@@ -155,6 +151,11 @@ class DraftViewController: UIViewController {
     
     func toggleLevel() {
         isOnMainLevel = !isOnMainLevel
+    }
+    
+    func revertPreviewToOriginal() {
+        previewImageView.image = originalImage
+        draftImage = originalImage
     }
     
     func applyFilterEffectToImage() {
@@ -245,7 +246,7 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             
             // Case: if normal effect is selected
             if idx == 0 {
-                previewImageView.image = originalImage
+                revertPreviewToOriginal()
                 return
             }
            
