@@ -150,12 +150,19 @@ class MetalFilter: ImahenFilter {
         case otsu
     }
     
-    init(name: String!, previewImg: UIImage!, threshold: CGFloat? = 0.0, scheme: Scheme) {
+    init(name: String!, previewImg: UIImage!, threshold: CGFloat? = 0.0, scheme: Scheme? = nil) {
         kernel = ImahenMetalKernel()
         selectedScheme = scheme
-        super.init(name: name, previewImg: previewImg)
+        super.init(name: name, previewImg: previewImg, thresh: threshold)
         self.filterType = .metal
-        self.threshold = threshold
+        
+        if threshold != nil {
+            self.threshold = threshold
+            self.doesUseIntensity = true
+        } else {
+            self.doesUseIntensity = false
+            self.threshold = nil
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

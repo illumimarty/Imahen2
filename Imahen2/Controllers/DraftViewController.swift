@@ -49,11 +49,11 @@ class DraftViewController: UIViewController {
         ]
         
         let advancedCategory = [
-            ImahenFilter(name: "Normal", previewImg: UIImage(systemName: "camera.filters")),
-            ImahenFilter(name: "xGradient", previewImg: UIImage(systemName: "camera.filters")),
-            ImahenFilter(name: "yGradient", previewImg: UIImage(systemName: "camera.filters")),
-            MetalFilter(name: "Sobel", previewImg: UIImage(systemName: "camera.filters"), threshold: 0.5, scheme: .sobel),
-            ImahenFilter(name: "Otsu", previewImg: UIImage(systemName: "camera.filters"))
+            MetalFilter(name: "Normal", previewImg: UIImage(systemName: "camera.filters")),
+            MetalFilter(name: "xGradient", previewImg: UIImage(systemName: "camera.filters")),
+            MetalFilter(name: "yGradient", previewImg: UIImage(systemName: "camera.filters")),
+            MetalFilter(name: "Sobel", previewImg: UIImage(systemName: "camera.filters"), scheme: .sobel),
+            MetalFilter(name: "Otsu", previewImg: UIImage(systemName: "camera.filters"))
         ]
         
         let categories: [ImahenFilterCategory] = [
@@ -182,11 +182,9 @@ class DraftViewController: UIViewController {
         let currFilter = self.selectedFilter!
         let image = draftImage
         var filteredImage: UIImage?
-        
-        if currFilter.doesUseIntensity {
-            filteredImage = currFilter.applyEffect(to: image, val: intensity)
-        } else {
-            filteredImage = currFilter.applyEffect(to: image)   // ✨ Where the magic happens ✨
+        filteredImage = currFilter.applyEffect(to: image, val: intensity)   // ✨ Where the magic happens ✨
+
+        if !currFilter.doesUseIntensity {
             draftImage = filteredImage
         }
         
@@ -251,6 +249,17 @@ extension DraftViewController: UICollectionViewDataSource, UICollectionViewDeleg
             }
            
             if let selectedFilter = selectedCategory?.filters![idx] {
+                
+                // Dev-use only (maybe remove once all filters are implemented?)
+                // MetalFilter doesn't use the `filter: CIFilter` property, so we check using another way
+                if selectedFilter.filterType == .metal {
+                    let filter = selectedFilter as! MetalFilter     // cool use for appropriate forced downcasting!
+                    if filter.selectedScheme == nil {
+                        print("Filter not yet implemented, returning...")
+                        return
+                    }
+                }
+                
                 self.selectedFilter = selectedFilter
                 
                 if selectedFilter.doesUseIntensity {
