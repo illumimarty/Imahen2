@@ -20,7 +20,7 @@ I created this app to explore the uses of common image effects used in CoreImage
 - [x] User can compare original and filtered images when pressing on the preview
 - [x] User can apply multiple filters one after the other
 - [x] User can adjust filter intensity when applying to image
-- [ ] User can save to gallery or share to third-party apps
+- [x] User can save to gallery or share to third-party apps
 
 **Optional Nice-to-have Stories**
 
