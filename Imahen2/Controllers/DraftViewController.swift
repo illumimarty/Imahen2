@@ -16,6 +16,7 @@ class DraftViewController: UIViewController {
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet var longPressGestureRecognizer: UILongPressGestureRecognizer!
     
     var originalImage: UIImage?
     var draftImage: UIImage?
@@ -93,6 +94,11 @@ class DraftViewController: UIViewController {
         view.accessibilityIdentifier = "DraftViewController"
         draftImage = originalImage
         previewImageView.image = draftImage
+        previewImageView.isUserInteractionEnabled = true
+        longPressGestureRecognizer.minimumPressDuration = 0.1
+        backToFilterCategoriesButton.isHidden = true
+        toolbar.isHidden = true
+        slider.isHidden = true
         
         // Setting up collection view
         optionCollectionView.delegate = self
@@ -105,12 +111,9 @@ class DraftViewController: UIViewController {
         slider.minimumValue = 0.0
         slider.maximumValue = 1.0
         slider.value = 0.5
-        slider.isContinuous = false // make this true if running on device. consider having a simulator/device condition when debugging
-        
-        backToFilterCategoriesButton.isHidden = true
-        toolbar.isHidden = true
-        slider.isHidden = true
+        slider.isContinuous = false // make this true if running on device. consider having a simulator/device condition when debuggin
     }
+    
     
     @IBAction func backToFiltersButtonTapped(_ sender: Any) {
         if (!isOnMainLevel) {
@@ -119,6 +122,16 @@ class DraftViewController: UIViewController {
             toggleBackToFilterCategoriesButton()
             toggleCollectionViewScroll()
             reloadCollectionView()
+        }
+    }
+    
+    @IBAction func didPressPreviewImageView(_ sender: UILongPressGestureRecognizer) {
+        switch (sender.state) {
+        case .began: previewImageView.image = originalImage
+        case .changed: return
+        case .ended: previewImageView.image = draftImage
+        default:
+            print("Unhandled state: \(sender.state)")
         }
     }
     

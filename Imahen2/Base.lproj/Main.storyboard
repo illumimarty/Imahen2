@@ -57,9 +57,13 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EGn-Fe-cAz">
                                 <rect key="frame" x="0.0" y="135" width="393" height="393"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EGn-Fe-cAz" secondAttribute="height" multiplier="1:1" id="IVL-Fe-R6b"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="SZI-ci-EVL" appends="YES" id="zel-K5-I0o"/>
+                                </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lrm-TG-N9H">
                                 <rect key="frame" x="5" y="544" width="86" height="30"/>
@@ -140,6 +144,7 @@
                     <navigationItem key="navigationItem" id="pV3-Uo-TDv"/>
                     <connections>
                         <outlet property="backToFilterCategoriesButton" destination="lrm-TG-N9H" id="nPf-ei-60b"/>
+                        <outlet property="longPressGestureRecognizer" destination="SZI-ci-EVL" id="YTE-QA-vxs"/>
                         <outlet property="optionCollectionView" destination="lin-cP-mFC" id="vHV-bM-0gv"/>
                         <outlet property="previewImageView" destination="EGn-Fe-cAz" id="CWm-ya-GAj"/>
                         <outlet property="slider" destination="BAr-jc-H5a" id="PHC-m2-O54"/>
@@ -147,6 +152,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4QQ-CF-S7m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="SZI-ci-EVL">
+                    <connections>
+                        <action selector="didPressPreviewImageView:" destination="0Kn-yg-KHw" id="xIq-go-6ew"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1886.2595419847328" y="-35.211267605633807"/>
         </scene>
