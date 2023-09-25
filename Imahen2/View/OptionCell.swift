@@ -17,6 +17,7 @@ class OptionCell: UICollectionViewCell {
         super.awakeFromNib()
         
         optionImage.image = img
-        self.layer.cornerRadius = 8.0
+        contentView.backgroundColor = .quaternarySystemFill
+        layer.cornerRadius = 8.0
     }
 }
